@@ -3,16 +3,6 @@ library(tm)
 # Clean up whitespace
 library(qdap)
 
-
-documents = c("She had toast for breakfast",
-              "The coffee this morning was excellent", 
-              "For lunch let's all have pancakes", 
-              "Later in the day, there will be more talks",
-              "Let's talk about this he talks to she",
-              "The talks on the first day were great", 
-              "The second day should have good presentations too")
-
-
 stopRemove <- function(document)
 {
   # Convert the character array to a corpus
@@ -27,14 +17,14 @@ stopRemove <- function(document)
   document <-data.frame(text=unlist(sapply(document, `[`, "content")), stringsAsFactors=F)
   # Convert the data frame to a text array
   document <- document[, "text"]
-  # Collapse the multi dimensional array into a single dimensional array
+  # Collapse the multi dimensional array into a single string array
   document <- paste(document, collapse = " ")
   # Clean up the whitespace
   document <- Trim(clean(document))
+  # Split the string into a psuedo single dimensional array
+  document <- strsplit(document," ")
+  # Convert it into a single dimensional array
+  document <- document[[1]]
   
   return(document)
 }
-
-d <- stopRemove(documents)
-
-d
