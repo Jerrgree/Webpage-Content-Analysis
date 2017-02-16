@@ -14,7 +14,10 @@ if(!exists("removeTags", mode = "function")) source("tagremove.R")
 #line
 
 file = "test.txt"
+# document <- removeTags(document)
 document = readFile(file)
 document <- stopRemove(document)
 document <- documentStem(document)
-document
+vocab <- toVocab(document)
+
+vocab
