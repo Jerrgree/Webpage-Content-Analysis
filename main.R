@@ -1,4 +1,3 @@
-
 # Include all other modules
 if(!exists("stopRemove", mode = "function")) source("stopword.R")
 if(!exists("readFile", mode = "function")) source("fileIO.R")
@@ -13,13 +12,17 @@ if(!exists("removeTags", mode = "function")) source("tagremove.R")
 #line <- readLines(f,n=1)
 #line
 
-name = "http_^^cam.cornell.edu^~baggett^index"
-infile = paste(name, "html", sep = ".")
-outfile = paste(name, "csv", sep = ".")
-document <- readFile(infile)
-document <- paste(document, collapse = " ")
-document <- removeTags(document)
-document <- stopRemove(document)
-document <- documentStem(document)
-vocab <- toVocab(document)
-write.csv(vocab, outfile)
+analyzeWebPage <- function(file)
+{
+  outfile = paste("output/", file, ".csv", sep = "")
+  document <- readFile(file)
+  document <- paste(document, collapse = " ")
+  document <- removeTags(document)
+  document <- stopRemove(document)
+  document <- documentStem(document)
+  vocab <- toVocab(document)
+  write.csv(vocab, outfile)
+}
+
+files <- list.files(path="projectdata", full.names = T, recursive = T)
+lapply(files, analyzeWebPage)
