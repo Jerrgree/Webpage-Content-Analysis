@@ -1,3 +1,5 @@
+# Module to remove stop words from a document
+
 # Remove stop Words
 library(tm)
 # Clean up whitespace
