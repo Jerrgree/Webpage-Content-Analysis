@@ -13,12 +13,13 @@ if(!exists("removeTags", mode = "function")) source("tagremove.R")
 #line <- readLines(f,n=1)
 #line
 
-file = "http_^^cam.cornell.edu^~baggett^index.html"
-document <- readFile(file)
+name = "http_^^cam.cornell.edu^~baggett^index"
+infile = paste(name, "html", sep = ".")
+outfile = paste(name, "csv", sep = ".")
+document <- readFile(infile)
 document <- paste(document, collapse = " ")
 document <- removeTags(document)
 document <- stopRemove(document)
 document <- documentStem(document)
 vocab <- toVocab(document)
-
-vocab
+write.csv(vocab, outfile)
