@@ -13,9 +13,10 @@ if(!exists("removeTags", mode = "function")) source("tagremove.R")
 #line <- readLines(f,n=1)
 #line
 
-file = "test.txt"
-# document <- removeTags(document)
-document = readFile(file)
+file = "http_^^cam.cornell.edu^~baggett^index.html"
+document <- readFile(file)
+document <- paste(document, collapse = " ")
+document <- removeTags(document)
 document <- stopRemove(document)
 document <- documentStem(document)
 vocab <- toVocab(document)
