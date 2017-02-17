@@ -17,8 +17,6 @@ stopRemove <- function(document)
   document = tm_map(document, removeNumbers)
   # Remove stopwords
   document = tm_map(document, removeWords, stopwords("english"))
-  # Stem the document
-  document = tm_map(document, stemDocument)
   # Convert the corpus to a data frame
   document <-data.frame(text=unlist(sapply(document, `[`, "content")), stringsAsFactors=F)
   # Convert the data frame to a text array
@@ -31,6 +29,6 @@ stopRemove <- function(document)
   document <- strsplit(document," ")
   # Convert it into a single dimensional array
   document <- document[[1]]
-  
+
   return(document)
 }

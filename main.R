@@ -1,3 +1,5 @@
+library(SnowballC)
+
 # Include all other modules
 if(!exists("stopRemove", mode = "function")) source("stopword.R")
 if(!exists("readFile", mode = "function")) source("fileIO.R")
@@ -32,8 +34,10 @@ globalVocab <- function(document)
   document <- paste(document, collapse = " ")
   # Remove html tags
   document <- removeTags(document)
-  # Remove stopwords and stem words
+  # Remove stopwords
   document <- stopRemove(document)
+  # Stem words
+  document <- wordStem(document)
   # Get the vocabulary
   vocab <- toVocab(document)
   # Write the vocabulary to a file
