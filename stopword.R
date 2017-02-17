@@ -13,8 +13,12 @@ stopRemove <- function(document)
   document = tm_map(document, content_transformer(tolower))
   # Strip all punctuation
   document = tm_map(document, removePunctuation)
+  # Strip all numbers
+  document = tm_map(document, removeNumbers)
   # Remove stopwords
   document = tm_map(document, removeWords, stopwords("english"))
+  # Stem the document
+  document = tm_map(document, stemDocument)
   # Convert the corpus to a data frame
   document <-data.frame(text=unlist(sapply(document, `[`, "content")), stringsAsFactors=F)
   # Convert the data frame to a text array
