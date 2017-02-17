@@ -24,5 +24,18 @@ analyzeWebPage <- function(file)
   write.csv(vocab, outfile)
 }
 
+globalVocab <- function(document)
+{
+  outfile = "output/global.csv"
+  document <- paste(document, collapse = " ")
+  document <- removeTags(document)
+  document <- stopRemove(document)
+  document <- documentStem(document)
+  vocab <- toVocab(document)
+  write.csv(vocab, outfile)
+}
+
+
 files <- list.files(path="projectdata", full.names = T, recursive = T)
-lapply(files, analyzeWebPage)
+t <- lapply(files, readFile)
+globalVocab(t)
