@@ -1,4 +1,5 @@
 library(SnowballC)
+library(tm)
 
 # Include all other modules
 if(!exists("stopRemove", mode = "function")) source("stopword.R")
@@ -19,7 +20,7 @@ analyzeWebPage <- function(file)
   # Remove stop words
   document <- stopRemove(document)
   # Stem words
-  #document <- documentStem(document)
+  document <- wordStem(document)
   # Get the vocabulary
   vocab <- toVocab(document)
   # Write the vocabulary to a file
