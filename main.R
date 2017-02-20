@@ -7,12 +7,9 @@ if(!exists("readFile", mode = "function")) source("fileIO.R")
 if(!exists("toVocab", mode = "function")) source("vocab.R")
 if(!exists("removeTags", mode = "function")) source("tagremove.R")
 
-analyzeWebPage <- function(file)
+
+analyzeDocument <- function(document)
 {
-  # Output retains same file heirarchy as the input folder
-  outfile = paste("output/", file, ".csv", sep = "")
-  # Read in the file
-  document <- readFile(file)
   # Collapse the document array into a single string
   document <- paste(document, collapse = " ")
   # Remove the html tags
@@ -23,24 +20,28 @@ analyzeWebPage <- function(file)
   document <- wordStem(document)
   # Get the vocabulary
   vocab <- toVocab(document)
-  # Write the vocabulary to a file
+  return(vocab)
+}
+
+# Reads and writes the vocabulary of a single file
+singleVocab <- function(file)
+{
+  outfile = paste("output/", file, ".csv", sep = "")
+  
+  document <- readFile(file)
+  vocab <- analyzeDocument(document)
   write.csv(vocab, outfile)
 }
 
-globalVocab <- function(document)
+# Reads and writes the vocabulary of a document
+multiVocab <- function(document, outfile)
 {
-  # Only one output file
-  outfile = "output/global.csv"
   # Collapse the list of documents into a single string
   document <- paste(document, collapse = " ")
-  # Remove html tags
-  document <- removeTags(document)
-  # Remove stopwords
-  document <- stopRemove(document)
-  # Stem words
-  document <- wordStem(document)
-  # Get the vocabulary
-  vocab <- toVocab(document)
+
+  # Analyze the document
+  vocab <- analyzeDocument(document)
+  
   # Write the vocabulary to a file
   write.csv(vocab, outfile)
 }
@@ -51,8 +52,19 @@ globalVocab <- function(document)
 files <- list.files(path="projectdata", full.names = T, recursive = T)
 
 # Build local vocabulary for every file
-lapply(files, analyzeWebPage) 
+lapply(files, singleVocab) 
 
 # Build global vocabulary
 t <- lapply(files, readFile)
-globalVocab(t)
+multiVocab(t, "output/global.csv")
+
+# List and read all files in the train folder
+trainFiles <- list.files(path="projectdata/test", full.names = T, recursive = T)
+trainFiles <- lapply(trainFiles, readFile)
+
+# List and read all files in the test folder
+testFiles <- list.files(path="projectdata/train", full.names = T, recursive = T)
+testFiles <- lapply(testFiles, readFile)
+
+multiVocab(trainFiles, "output/train.csv")
+multiVocab(testFiles, "output/test.csv")
