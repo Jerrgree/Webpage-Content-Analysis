@@ -2,7 +2,7 @@ library(SnowballC)
 library(tm)
 
 # Include all other modules
-if(!exists("stopRemove", mode = "function")) source("stopword.R")
+source("stopword.R")
 if(!exists("readFile", mode = "function")) source("fileIO.R")
 if(!exists("toVocab", mode = "function")) source("vocab.R")
 if(!exists("removeTags", mode = "function")) source("tagremove.R")
@@ -33,6 +33,16 @@ singleVocab <- function(file)
   write.csv(vocab, outfile)
 }
 
+findThatBrocolli <- function(file)
+{
+  document <- readFile(file)
+  vocab <- analyzeDocument(document)
+  if (is.element("pooooooooooooooch", vocab$word))
+  {
+    write(file, "data.txt")
+  }
+}
+
 # Reads and writes the vocabulary of a document
 multiVocab <- function(document, outfile)
 {
@@ -50,6 +60,7 @@ multiVocab <- function(document, outfile)
 #analyzeWebPage("projectdata/test/course/http_^^cs.cornell.edu^Info^Courses^Current^CS415^CS414.html")
 
 files <- list.files(path="projectdata", full.names = T, recursive = T)
+lapply(files, findThatBrocolli)
 
 # Build local vocabulary for every file
 lapply(files, singleVocab) 

@@ -8,6 +8,13 @@ library(qdap)
 stopRemove <- function(document)
 {
   # Convert the character array to a corpus
+  
+  emailRegex <- "[[:alnum:]]+@[[:alnum:]]+.[[:alnum:]]+"
+  urlRegex <- "(http)?[[:graph:]]*(www.)?[[:graph:]]+"
+  
+  document <- gsub(emailRegex, " ", document)
+  document <- gsub(urlRegex, " ", document)
+  
   document <- documents <- Corpus(VectorSource(document))
   # Make all characters lowercase
   document = tm_map(document, content_transformer(tolower))
