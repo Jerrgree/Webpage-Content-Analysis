@@ -10,7 +10,7 @@ stopRemove <- function(document)
   # Convert the character array to a corpus
   
   emailRegex <- "[[:alnum:]]+@[[:alnum:]]+.[[:alnum:]]+"
-  urlRegex <- "(http)?[[:graph:]]*(www.)?[[:graph:]]+"
+  urlRegex <- "(http[[:graph:]]*)(www[[:graph:]])"
   
   document <- gsub(emailRegex, " ", document)
   document <- gsub(urlRegex, " ", document)

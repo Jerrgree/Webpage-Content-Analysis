@@ -59,23 +59,27 @@ multiVocab <- function(document, outfile)
 # A static webpage for testing changes
 #analyzeWebPage("projectdata/test/course/http_^^cs.cornell.edu^Info^Courses^Current^CS415^CS414.html")
 
-files <- list.files(path="projectdata", full.names = T, recursive = T)
-lapply(files, findThatBrocolli)
+#files <- list.files(path="projectdata", full.names = T, recursive = T)
+#lapply(files, findThatBrocolli)
 
 # Build local vocabulary for every file
-lapply(files, singleVocab) 
+#lapply(files, singleVocab) 
 
 # Build global vocabulary
-t <- lapply(files, readFile)
-multiVocab(t, "output/global.csv")
-
-# List and read all files in the train folder
-trainFiles <- list.files(path="projectdata/test", full.names = T, recursive = T)
-trainFiles <- lapply(trainFiles, readFile)
+#t <- lapply(files, readFile)
+#multiVocab(t, "output/global.csv")
 
 # List and read all files in the test folder
-testFiles <- list.files(path="projectdata/train", full.names = T, recursive = T)
-testFiles <- lapply(testFiles, readFile)
+testFiles1 <- list.files(path="projectdata/train/student", full.names = T, recursive = T)
+t1 <- lapply(testFiles1, readFile)
 
-multiVocab(trainFiles, "output/train.csv")
-multiVocab(testFiles, "output/test.csv")
+testFiles2 <- list.files(path="projectdata/train/faculty", full.names = T, recursive = T)
+t2 <- lapply(testFiles2, readFile)
+
+testFiles3 <- list.files(path="projectdata/train/course", full.names = T, recursive = T)
+t3 <- lapply(testFiles3, readFile)
+
+
+multiVocab(t1, "output/student.csv")
+multiVocab(t2, "output/faculty.csv")
+multiVocab(t3, "output/course.csv")
