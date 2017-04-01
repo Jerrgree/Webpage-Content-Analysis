@@ -10,9 +10,9 @@ source("classify.R")
 # Each revelant folder
 
 # Train folders
-trainStudent <- list.files(path="output/projectdata/train/student", full.names = T, recursive = T)
-trainFaculty <- list.files(path="output/projectdata/train/faculty", full.names = T, recursive = T)
-trainCourse <- list.files(path="output/projectdata/train/course", full.names = T, recursive = T)
+#trainStudent <- list.files(path="output/projectdata/train/student", full.names = T, recursive = T)
+#trainFaculty <- list.files(path="output/projectdata/train/faculty", full.names = T, recursive = T)
+#trainCourse <- list.files(path="output/projectdata/train/course", full.names = T, recursive = T)
 
 # Test folders
 testStudent <- list.files(path="output/projectdata/test/student", full.names = T, recursive = T)
