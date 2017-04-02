@@ -50,19 +50,7 @@ for (i in 1:length(testStudent))
   decision1 <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
   decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
-  
-  decision = ""
-  
-  if (decision2 == "S")
-  {
-    decision = "S"
-  }
-  
-  else
-  {
-    decision = decision1
-  }
-  
+  decision = decide(decision1, decision2)
   
   if (decision == "S")
   {
@@ -88,17 +76,7 @@ for (i in 1:length(testFaculty))
   decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   
-  decision = ""
-  
-  if (decision2 == "S")
-  {
-    decision = "S"
-  }
-  
-  else
-  {
-    decision = decision1
-  }
+  decision = decide(decision1, decision2)
   
   if (decision == "S")
   {
@@ -124,12 +102,7 @@ for (i in 1:length(testCourse))
   decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   
-  decision = decision2
-  
-  if (decision1 != "S")
-  {
-    decision = decision1
-  }
+  decision = decide(decision1, decision2)
   
   if (decision == "S")
   {

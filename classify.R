@@ -136,3 +136,15 @@ knn_classify <- function(data, studentList, facultyList, courseList)
   return("C")
 }
 
+decide <- function(naive, knn)
+{
+  decision = naive
+  
+  if (knn == "S")
+  {
+    decision = knn
+  }
+  
+  return(decision)
+  
+}
