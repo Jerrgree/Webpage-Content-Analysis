@@ -10,9 +10,9 @@ source("classify.R")
 # Each revelant folder
 
 # Train folders
-#trainStudent <- list.files(path="output/projectdata/train/student", full.names = T, recursive = T)
-#trainFaculty <- list.files(path="output/projectdata/train/faculty", full.names = T, recursive = T)
-#trainCourse <- list.files(path="output/projectdata/train/course", full.names = T, recursive = T)
+trainStudent <- list.files(path="output/projectdata/train/student", full.names = T, recursive = T)
+trainFaculty <- list.files(path="output/projectdata/train/faculty", full.names = T, recursive = T)
+trainCourse <- list.files(path="output/projectdata/train/course", full.names = T, recursive = T)
 
 # Test folders
 testStudent <- list.files(path="output/projectdata/test/student", full.names = T, recursive = T)
@@ -52,7 +52,8 @@ arrange(facultyVocab, desc(count))
 for (i in 1:length(testStudent))
 {
   sample = within(read.csv(testStudent[i]), rm(X))
-  decision <- classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   if (decision == "S")
   {
@@ -73,7 +74,8 @@ for (i in 1:length(testStudent))
 for (i in 1:length(testFaculty))
 {
   sample = within(read.csv(testFaculty[i]), rm(X))
-  decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   if (decision == "S")
   {
@@ -94,7 +96,8 @@ for (i in 1:length(testFaculty))
 for (i in 1:length(testCourse))
 {
   sample = within(read.csv(testCourse[i]), rm(X))
-  decision <- classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   if (decision == "S")
   {
