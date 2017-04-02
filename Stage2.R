@@ -52,9 +52,23 @@ arrange(facultyVocab, desc(count))
 for (i in 1:length(testStudent))
 {
   sample = within(read.csv(testStudent[i]), rm(X))
-  #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
-  #decision <- dist_classify(sample, studentVocab, facultyVocab, courseVocab)
-  decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  
+  decision1 <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  
+  
+  decision = ""
+  
+  if (decision2 == "S")
+  {
+    decision = "S"
+  }
+  
+  else
+  {
+    decision = decision1
+  }
+  
   
   if (decision == "S")
   {
@@ -75,9 +89,22 @@ for (i in 1:length(testStudent))
 for (i in 1:length(testFaculty))
 {
   sample = within(read.csv(testFaculty[i]), rm(X))
-  decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
-  #decision <- dist_classify(sample, studentVocab, facultyVocab, courseVocab)
-  #decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  
+  decision1 <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  
+  
+  decision = ""
+  
+  if (decision2 == "S")
+  {
+    decision = "S"
+  }
+  
+  else
+  {
+    decision = decision1
+  }
   
   if (decision == "S")
   {
@@ -98,9 +125,17 @@ for (i in 1:length(testFaculty))
 for (i in 1:length(testCourse))
 {
   sample = within(read.csv(testCourse[i]), rm(X))
-  decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
-  #decision <- dist_classify(sample, studentVocab, facultyVocab, courseVocab)
-  #decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  
+  decision1 <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  
+  
+  decision = decision1
+  
+  if (decision2 == "S")
+  {
+    decision = "S"
+  }
   
   if (decision == "S")
   {
