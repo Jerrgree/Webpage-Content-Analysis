@@ -8,7 +8,7 @@ dist_classify <- function(data, studentVocab, facultyVocab, courseVocab)
   cVal = 0
   fVal = 0
   
-  arrange(data, desc(count))
+  data <- arrange(data, desc(count))
   
   margin = min(500, length(data))
   #margin = length(data)
@@ -95,12 +95,12 @@ naive_classify <- function(data, studentVocab, facultyVocab, courseVocab)
 
 distance <- function(data, vocab)
 {
-  arrange(data, desc(count))
+  data <- arrange(data, desc(count))
   
   val = 0
   
-  margin = min(500, nrow(data))
-  #margin = nrow(data)
+  #margin = min(200, nrow(data))
+  margin = nrow(data)
   for(i in 1:margin)
   {
     line = data[i,]
@@ -130,7 +130,7 @@ knn_classify <- function(data, studentList, facultyList, courseList)
   cVal = 0
   fVal = 0
   
-  arrange(data, desc(count))
+  data <- arrange(data, desc(count))
   
   distances <- data.frame(class=character(), dist=double())
   

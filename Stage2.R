@@ -53,6 +53,7 @@ for (i in 1:length(testStudent))
 {
   sample = within(read.csv(testStudent[i]), rm(X))
   #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- dist_classify(sample, studentVocab, facultyVocab, courseVocab)
   decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   if (decision == "S")
@@ -74,8 +75,9 @@ for (i in 1:length(testStudent))
 for (i in 1:length(testFaculty))
 {
   sample = within(read.csv(testFaculty[i]), rm(X))
-  #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
-  decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- dist_classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   if (decision == "S")
   {
@@ -96,8 +98,9 @@ for (i in 1:length(testFaculty))
 for (i in 1:length(testCourse))
 {
   sample = within(read.csv(testCourse[i]), rm(X))
-  #decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
-  decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
+  decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- dist_classify(sample, studentVocab, facultyVocab, courseVocab)
+  #decision <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   if (decision == "S")
   {
