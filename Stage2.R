@@ -9,12 +9,12 @@ source("classify.R")
 
 # Each revelant folder
 
-# Train folders
+# Training files
 trainStudent <- list.files(path="output/projectdata/train/student", full.names = T, recursive = T)
 trainFaculty <- list.files(path="output/projectdata/train/faculty", full.names = T, recursive = T)
 trainCourse <- list.files(path="output/projectdata/train/course", full.names = T, recursive = T)
 
-# Test folders
+# Test files
 testStudent <- list.files(path="output/projectdata/test/student", full.names = T, recursive = T)
 testFaculty <- list.files(path="output/projectdata/test/faculty", full.names = T, recursive = T)
 testCourse <- list.files(path="output/projectdata/test/course", full.names = T, recursive = T)
@@ -40,12 +40,6 @@ FasC = 0
 CasS = 0
 CasF = 0
 CasC = 0
-
-# Build a classifier for all train documents
-
-arrange(courseVocab, desc(count))
-arrange(studentVocab, desc(count))
-arrange(facultyVocab, desc(count))
 
 # Classify each test document and note errors
 
@@ -130,11 +124,11 @@ for (i in 1:length(testCourse))
   decision2 <- knn_classify(sample, trainStudent, trainFaculty, trainCourse)
   
   
-  decision = decision1
+  decision = decision2
   
-  if (decision2 == "S")
+  if (decision1 != "S")
   {
-    decision = "S"
+    decision = decision1
   }
   
   if (decision == "S")
