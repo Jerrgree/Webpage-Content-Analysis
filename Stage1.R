@@ -7,6 +7,20 @@ if(!exists("readFile", mode = "function")) source("fileIO.R")
 if(!exists("toVocab", mode = "function")) source("vocab.R")
 if(!exists("removeTags", mode = "function")) source("tagremove.R")
 
+removeChars <- function(document)
+{
+  newDoc = list()
+  
+  for (i in range(1:length(document)))
+  {
+    if (length(document[i]) > 1)
+    {
+      newDoc <- c(newDoc, document[i])
+    }
+  }
+  
+  return(newDoc)
+}
 
 analyzeDocument <- function(document)
 {
@@ -18,6 +32,8 @@ analyzeDocument <- function(document)
   document <- stopRemove(document)
   # Stem words
   document <- wordStem(document)
+  # Remove single characters
+  document <- removeChars(document)
   # Get the vocabulary
   vocab <- toVocab(document)
   return(vocab)
@@ -59,15 +75,15 @@ multiVocab <- function(document, outfile)
 # A static webpage for testing changes
 #analyzeWebPage("projectdata/test/course/http_^^cs.cornell.edu^Info^Courses^Current^CS415^CS414.html")
 
-#files <- list.files(path="projectdata", full.names = T, recursive = T)
+files <- list.files(path="projectdata", full.names = T, recursive = T)
 #lapply(files, findThatBrocolli)
 
 # Build local vocabulary for every file
-#lapply(files, singleVocab) 
+lapply(files, singleVocab) 
 
 # Build global vocabulary
-#t <- lapply(files, readFile)
-#multiVocab(t, "output/global.csv")
+t <- lapply(files, readFile)
+multiVocab(t, "output/global.csv")
 
 # List and read all files in the test folder
 testFiles1 <- list.files(path="projectdata/train/student", full.names = T, recursive = T)
@@ -78,7 +94,6 @@ t2 <- lapply(testFiles2, readFile)
 
 testFiles3 <- list.files(path="projectdata/train/course", full.names = T, recursive = T)
 t3 <- lapply(testFiles3, readFile)
-
 
 multiVocab(t1, "output/student.csv")
 multiVocab(t2, "output/faculty.csv")

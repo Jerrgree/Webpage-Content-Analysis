@@ -2,13 +2,17 @@ library(plyr)
 library(compare)
 
 # Classification based on distance
-classify <- function(data, studentVocab, facultyVocab, courseVocab)
+dist_classify <- function(data, studentVocab, facultyVocab, courseVocab)
 {
   sVal = 0
   cVal = 0
   fVal = 0
   
-  for(i in 1:length(data))
+  arrange(data, desc(count))
+  
+  margin = min(500, length(data))
+  #margin = length(data)
+  for(i in 1:margin)
   {
     line = data[i,]
     word <- as.character(line$word)
@@ -60,9 +64,10 @@ classify <- function(data, studentVocab, facultyVocab, courseVocab)
   return("C")
 }
 
-qclassify <- function(data, studentVocab, facultyVocab, courseVocab)
+# Naive classification
+naive_classify <- function(data, studentVocab, facultyVocab, courseVocab)
 {
-  margin = 200
+  margin = 650
   
   arrange(data, desc(count))
   

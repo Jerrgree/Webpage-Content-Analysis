@@ -73,7 +73,7 @@ for (i in 1:length(testStudent))
 for (i in 1:length(testFaculty))
 {
   sample = within(read.csv(testFaculty[i]), rm(X))
-  decision <- classify(sample, studentVocab, facultyVocab, courseVocab)
+  decision <- naive_classify(sample, studentVocab, facultyVocab, courseVocab)
   
   if (decision == "S")
   {
@@ -118,4 +118,5 @@ print(" |S | F | C")
 print(paste("S|", SasS, " | ", SasF, " | ", SasC))
 print(paste("F|", FasS, " | ", FasF, " | ", FasC))
 print(paste("C|", CasS, " | ", CasF, " | ", CasC))
+print((CasC + SasS + FasF) / (CasC + SasS + FasF + CasF + SasC + FasS + CasS + SasF + FasC))
 
