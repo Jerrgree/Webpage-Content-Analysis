@@ -40,14 +40,15 @@ makeGlobals <- function()
 }
 
 #makeGlobals()
-# Initialize Confusion matrix
 
 accuracies = 0
 
+# Each partitions files, indexed in partition order
 studentFiles = c("output/p1/student", "output/p2/student", "output/p3/student", "output/p4/student", "output/p5/student")
 courseFiles = c("output/p1/course", "output/p2/course", "output/p3/course", "output/p4/course", "output/p5/course")
 facultyFiles = c("output/p1/faculty", "output/p2/faculty", "output/p3/faculty", "output/p4/faculty", "output/p5/faculty")
 
+# Each partition vocabulary, indexed in partition order
 studentVocabs = c("output/p1Student.csv", "output/p2Student.csv", "output/p3Student.csv", "output/p4Student.csv", "output/p5Student.csv")
 courseVocabs = c("output/p1Course.csv", "output/p2Course.csv", "output/p3Course.csv", "output/p4Course.csv", "output/p5Course.csv")
 facultyVocabs = c("output/p1Faculty.csv", "output/p2Faculty.csv", "output/p3Faculty.csv", "output/p4Faculty.csv", "output/p5Faculty.csv")

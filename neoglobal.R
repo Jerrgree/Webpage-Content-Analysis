@@ -1,21 +1,25 @@
 library(sqldf)
 
 # Merge two dataframes
-
 mergeDF <- function(df1, df2)
 {
+  # Find the unique words between the two
   word1 <- as.character(df1$word)
   word2 <- as.character(df2$word)
   uWords = unique(c(word1, word2))
   
   count <- rep(0, length(uWords))
   
+  # Create a dataframe containing the unique words between the two vocabularies
   vocab = data.frame(word=uWords, count=count, stringsAsFactors=FALSE)
   
+  # Add the two dataframe's counts using two outer left joins
   vocab <- sqldf("select * from vocab left join df1 using (word) left join df2 using (word)")
   
+  # Sum the two dataframe's counts into the new dataframe's count
   vocab <- transform(vocab, count = rowSums(vocab[, 2:4], na.rm = TRUE))
   
+  # Splice off the two dataframe's counts
   vocab <- within(vocab, rm(count.1))
   vocab <- within(vocab, rm(count.2))
   
